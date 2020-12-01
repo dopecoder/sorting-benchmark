@@ -8,30 +8,46 @@ bool getVerboseOption(int argc, char *argv[]);
 
 std::string toLower(string algorithm);
 
+int main(int argc, char *argv[])
+{
 
-int main(int argc, char *argv[]) {
-
-    if (argc >= 5) {
+    if (argc >= 5)
+    {
 
         bool isVerbose = getVerboseOption(argc, argv);
-        if (isVerbose) { argv++; }
+        if (isVerbose)
+        {
+            argv++;
+        }
 
         int arraySize = atoi(argv[1]);
         char *inputFile = argv[2];
         char *outputFile = argv[3];
+
+        cout << "Array Size : " << arraySize << endl;
+        cout << "Input File : " << inputFile << endl;
+        cout << "Output File : " << outputFile << endl;
+
         std::string algorithm = toLower(argv[4]);
 
-        if (algorithm == QUICK_SORT) {
+        if (algorithm == QUICK_SORT)
+        {
             QuickSort qs(arraySize, inputFile, outputFile, isVerbose);
             qs.sort();
-        } else if (algorithm == MERGE_SORT) {
+        }
+        else if (algorithm == MERGE_SORT)
+        {
             MergeSort ms(arraySize, inputFile, outputFile, isVerbose);
             ms.sort();
-        } else if (algorithm == INSERTION_SORT) {
+        }
+        else if (algorithm == INSERTION_SORT)
+        {
             InsertionSort is(arraySize, inputFile, outputFile, isVerbose);
             is.sort();
         }
-    } else {
+    }
+    else
+    {
         cerr << "Error occured." << endl;
         return -1;
     }
@@ -45,15 +61,18 @@ int main(int argc, char *argv[]) {
  * @param argv
  * @return
  */
-bool getVerboseOption(int argc, char *argv[]) {
+bool getVerboseOption(int argc, char *argv[])
+{
     bool isVerbose = false;
     int option = 0;
-    while ((option = getopt(argc, argv, "v")) != -1) {
-        switch (option) {
-            case 'v' :
-                isVerbose = true;
-            default:
-                break;
+    while ((option = getopt(argc, argv, "v")) != -1)
+    {
+        switch (option)
+        {
+        case 'v':
+            isVerbose = true;
+        default:
+            break;
         }
     }
 
@@ -65,7 +84,8 @@ bool getVerboseOption(int argc, char *argv[]) {
  * @param algorithm
  * @return
  */
-std::string toLower(string algorithm) {
+std::string toLower(string algorithm)
+{
     std::transform(algorithm.begin(), algorithm.end(), algorithm.begin(), ::tolower);
     return algorithm;
 }
